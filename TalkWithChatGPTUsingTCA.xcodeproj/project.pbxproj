@@ -11,6 +11,11 @@
 		5AC6FF7E2CAEF616005E2550 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AC6FF7D2CAEF616005E2550 /* ContentView.swift */; };
 		5AC6FF802CAEF617005E2550 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5AC6FF7F2CAEF617005E2550 /* Assets.xcassets */; };
 		5AC6FF832CAEF617005E2550 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5AC6FF822CAEF617005E2550 /* Preview Assets.xcassets */; };
+		5AC6FF8B2CAEF657005E2550 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = 5AC6FF8A2CAEF657005E2550 /* ComposableArchitecture */; };
+		5AC6FF8D2CAEF703005E2550 /* MessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AC6FF8C2CAEF703005E2550 /* MessageView.swift */; };
+		5AC6FF942CAEF7A5005E2550 /* ChatTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AC6FF932CAEF7A5005E2550 /* ChatTextFieldView.swift */; };
+		5AC6FF962CAEF9B0005E2550 /* ChatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AC6FF952CAEF9B0005E2550 /* ChatsView.swift */; };
+		5AC6FF982CAEFA03005E2550 /* ChatCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AC6FF972CAEFA03005E2550 /* ChatCellView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +24,10 @@
 		5AC6FF7D2CAEF616005E2550 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		5AC6FF7F2CAEF617005E2550 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5AC6FF822CAEF617005E2550 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		5AC6FF8C2CAEF703005E2550 /* MessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageView.swift; sourceTree = "<group>"; };
+		5AC6FF932CAEF7A5005E2550 /* ChatTextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatTextFieldView.swift; sourceTree = "<group>"; };
+		5AC6FF952CAEF9B0005E2550 /* ChatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatsView.swift; sourceTree = "<group>"; };
+		5AC6FF972CAEFA03005E2550 /* ChatCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatCellView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -26,6 +35,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5AC6FF8B2CAEF657005E2550 /* ComposableArchitecture in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -52,7 +62,7 @@
 			isa = PBXGroup;
 			children = (
 				5AC6FF7B2CAEF616005E2550 /* TalkWithChatGPTUsingTCAApp.swift */,
-				5AC6FF7D2CAEF616005E2550 /* ContentView.swift */,
+				5AC6FF912CAEF73E005E2550 /* Views */,
 				5AC6FF7F2CAEF617005E2550 /* Assets.xcassets */,
 				5AC6FF812CAEF617005E2550 /* Preview Content */,
 			);
@@ -65,6 +75,26 @@
 				5AC6FF822CAEF617005E2550 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		5AC6FF912CAEF73E005E2550 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				5AC6FF7D2CAEF616005E2550 /* ContentView.swift */,
+				5AC6FF922CAEF784005E2550 /* Message */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		5AC6FF922CAEF784005E2550 /* Message */ = {
+			isa = PBXGroup;
+			children = (
+				5AC6FF8C2CAEF703005E2550 /* MessageView.swift */,
+				5AC6FF952CAEF9B0005E2550 /* ChatsView.swift */,
+				5AC6FF972CAEFA03005E2550 /* ChatCellView.swift */,
+				5AC6FF932CAEF7A5005E2550 /* ChatTextFieldView.swift */,
+			);
+			path = Message;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -83,6 +113,9 @@
 			dependencies = (
 			);
 			name = TalkWithChatGPTUsingTCA;
+			packageProductDependencies = (
+				5AC6FF8A2CAEF657005E2550 /* ComposableArchitecture */,
+			);
 			productName = TalkWithChatGPTUsingTCA;
 			productReference = 5AC6FF782CAEF616005E2550 /* TalkWithChatGPTUsingTCA.app */;
 			productType = "com.apple.product-type.application";
@@ -111,6 +144,9 @@
 				Base,
 			);
 			mainGroup = 5AC6FF6F2CAEF616005E2550;
+			packageReferences = (
+				5AC6FF892CAEF657005E2550 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */,
+			);
 			productRefGroup = 5AC6FF792CAEF616005E2550 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -137,7 +173,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5AC6FF8D2CAEF703005E2550 /* MessageView.swift in Sources */,
 				5AC6FF7E2CAEF616005E2550 /* ContentView.swift in Sources */,
+				5AC6FF962CAEF9B0005E2550 /* ChatsView.swift in Sources */,
+				5AC6FF942CAEF7A5005E2550 /* ChatTextFieldView.swift in Sources */,
+				5AC6FF982CAEFA03005E2550 /* ChatCellView.swift in Sources */,
 				5AC6FF7C2CAEF616005E2550 /* TalkWithChatGPTUsingTCAApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -344,6 +384,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		5AC6FF892CAEF657005E2550 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/pointfreeco/swift-composable-architecture";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.15.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		5AC6FF8A2CAEF657005E2550 /* ComposableArchitecture */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5AC6FF892CAEF657005E2550 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */;
+			productName = ComposableArchitecture;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 5AC6FF702CAEF616005E2550 /* Project object */;
 }
