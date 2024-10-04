@@ -51,7 +51,8 @@ struct Choice: Decodable, Equatable {
 }
 
 // MARK: - Message
-struct Message: Decodable, Hashable, Equatable {
+// この構造体はリスクエストを送信する際にも使用するので`Codable`
+struct Message: Codable, Hashable, Equatable {
     let role, content: String
 }
 

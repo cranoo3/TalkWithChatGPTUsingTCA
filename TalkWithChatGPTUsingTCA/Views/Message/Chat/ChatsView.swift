@@ -8,19 +8,26 @@
 import SwiftUI
 
 struct ChatsView: View {
-    // FIXME: レスポンスデータを渡す必要がありそう？
+    let messages: [Message]
     
     var body: some View {
         ScrollView {
-            ForEach(0...10, id: \.self) { element in
-                // FIXME: レスポンスに応じて返答するように変更してください
-                ChatCellView(agent: element % 2 != 0 ? .assistant("Hello, human") : .user("Hello, AI"))
-                    .padding()
+            ForEach(messages, id: \.hashValue) { element in
+                Group {
+                    let content = element.content
+                    
+                    if element.role == "user" {
+                        ChatCellView(agent: .user(content))
+                    } else {
+                        ChatCellView(agent: .assistant(content))
+                    }
+                }
+                .padding()
             }
         }
     }
 }
 
 #Preview {
-    ChatsView()
+    ChatsView(messages: [Message]())
 }

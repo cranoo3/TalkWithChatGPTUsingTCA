@@ -13,7 +13,13 @@ struct MessageView: View {
     
     var body: some View {
         ZStack {
-            ChatsView()
+            ChatsView(messages: store.messages)
+                .gesture (
+                    DragGesture()
+                        .onChanged { _ in
+                            store.send(.scrollChanged)
+                        }
+                )
             
             // 画面上部グラデーション
             GeometryReader { reader in

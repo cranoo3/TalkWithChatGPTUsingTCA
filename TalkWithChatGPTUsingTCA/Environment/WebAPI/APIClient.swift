@@ -10,31 +10,34 @@ import ComposableArchitecture
 
 @DependencyClient
 struct APIClient {
-    var fetch: @Sendable () async throws -> APIResponse    
+    var fetch: @Sendable (APIRequest) async throws -> APIResponse
     struct FetchError: Error, Equatable {}
 }
 
 extension APIClient: TestDependencyKey {
     static let previewValue = Self(
-        fetch: { .mock}
+        fetch: {_ in .mock}
     )
     
     static let testValue = Self()
 }
 
 extension APIClient: DependencyKey {
-    static let liveValue = APIClient {
+    static let liveValue = APIClient { request in
         // FIXME: URLのハードコーディング + 強制アンラップ
         var url = URL(string: "https://api.openai.com/v1/chat/completions")!
+        
+        var requestBody = try JSONEncoder().encode(request)
         
         var urlRequest = URLRequest(url: url)
         urlRequest.httpMethod = "POST"
         urlRequest.allHTTPHeaderFields = [
-            "Authorization" : "Bearer \(apiKey)",
-            "OpenAI-Organization": organizationID,
+            "Authorization" : "Bearer xxxxxx",
+            "OpenAI-Organization": "xxxxxx",
             "Content-Type" : "application/json"]
+        urlRequest.httpBody = requestBody
         
-        // FIXME: 強制アンラップ
+        // FIXME: レスポンスデータのエラーハンドリングをしよう
         let (data, _) = try await URLSession.shared.data(for: urlRequest)
         let decodeData = try JSONDecoder().decode(APIResponse.self, from: data)
         

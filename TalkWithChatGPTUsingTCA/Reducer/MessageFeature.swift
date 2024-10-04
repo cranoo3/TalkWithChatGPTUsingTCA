@@ -14,36 +14,67 @@ struct MessageFeature {
     struct State: Equatable {
         var isLoading = false
         var messageParameter = ""
-        var responseData: APIResponse = APIResponse()
+        var isKeyboardFocused = false
+        var messages = [Message]()
     }
     
+    @Dependency(\.apiClient) var apiClient
     
     enum Action: BindableAction {
         case binding(BindingAction<State>)
         case sendButtonTapped
-        case apiResponse(APIResponse)
+        case scrollChanged
+        case keyboardFocusChanged(Bool)
+        case sendRequest(APIRequest)
+        case apiResponse(Result<APIResponse, Error>)
     }
     
+    // TODO: 🤨ここきったねぇ。解決策はEffect?
     var body: some ReducerOf<Self> {
         BindingReducer()
-        Reduce{ state, action in
+        Reduce{
+            state,
+            action in
             switch action {
             case .binding(\.messageParameter):
                 return .none
             case .binding:
                 return .none
+                
             case .sendButtonTapped:
-                return .run { [message = state.messageParameter] send in
-                    let urlSession = URLSession.shared
-                    // FIXME: 強制アンラップ
-                    // FIXME: APIClientみたいなので、通信処理を外に出したいね
-                    let (data, _) = try await urlSession.data(from: URL(string: "")!)
-                    let decodeData = try? JSONDecoder().decode(APIResponse.self, from: data)
-                    await send(.apiResponse(decodeData!))
+                // 送信するメッセージを作成
+                state.messages.append(Message(role: "user", content: state.messageParameter))
+                // TextFieldを空にする
+                state.messageParameter = ""
+                // FIXME: モデル名 ハードコーディング
+                return .send(.sendRequest(APIRequest(model: "gpt-4o", messages: state.messages)))
+                
+            case .scrollChanged:
+                state.isKeyboardFocused = false
+                return .none
+                
+            case let .keyboardFocusChanged(isFocus):
+                state.isKeyboardFocused = isFocus
+                return .none
+                
+                // MARK: - リクエスト
+            case let .sendRequest(messageData):
+                print("sendRequest")
+                return .run { send in
+                    await send(.apiResponse(
+                        Result { try await apiClient.fetch(messageData) }
+                    ))
                 }
-            case let .apiResponse(responseData):
-                state.responseData = responseData
+                // MARK: - レスポンスデータ
+            case let .apiResponse(.success(responseData)):
+                guard let message = responseData.choices.first?.message else {
+                    // ここって.noneでいいのかな
+                    return .none
+                }
+                state.messages.append(message)
                 state.isLoading = false
+                return .none
+            case .apiResponse(.failure):
                 return .none
             }
         }

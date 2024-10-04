@@ -11,6 +11,7 @@
 		5A0EB4622CAFF3430061D721 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A0EB4612CAFF3430061D721 /* APIClient.swift */; };
 		5A0EB4652CAFF5610061D721 /* APIResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A0EB4642CAFF5610061D721 /* APIResponse.swift */; };
 		5AB6FEAC2CB01FD100AFD791 /* MockResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AB6FEAB2CB01FD100AFD791 /* MockResponse.swift */; };
+		5AB6FEAE2CB025BF00AFD791 /* APIRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AB6FEAD2CB025BE00AFD791 /* APIRequest.swift */; };
 		5AC6FF7C2CAEF616005E2550 /* TalkWithChatGPTUsingTCAApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AC6FF7B2CAEF616005E2550 /* TalkWithChatGPTUsingTCAApp.swift */; };
 		5AC6FF7E2CAEF616005E2550 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AC6FF7D2CAEF616005E2550 /* ContentView.swift */; };
 		5AC6FF802CAEF617005E2550 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5AC6FF7F2CAEF617005E2550 /* Assets.xcassets */; };
@@ -27,6 +28,7 @@
 		5A0EB4612CAFF3430061D721 /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
 		5A0EB4642CAFF5610061D721 /* APIResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIResponse.swift; sourceTree = "<group>"; };
 		5AB6FEAB2CB01FD100AFD791 /* MockResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockResponse.swift; sourceTree = "<group>"; };
+		5AB6FEAD2CB025BE00AFD791 /* APIRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIRequest.swift; sourceTree = "<group>"; };
 		5AC6FF782CAEF616005E2550 /* TalkWithChatGPTUsingTCA.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TalkWithChatGPTUsingTCA.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5AC6FF7B2CAEF616005E2550 /* TalkWithChatGPTUsingTCAApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TalkWithChatGPTUsingTCAApp.swift; sourceTree = "<group>"; };
 		5AC6FF7D2CAEF616005E2550 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -70,6 +72,7 @@
 			isa = PBXGroup;
 			children = (
 				5A0EB4612CAFF3430061D721 /* APIClient.swift */,
+				5AB6FEAD2CB025BE00AFD791 /* APIRequest.swift */,
 				5A0EB4642CAFF5610061D721 /* APIResponse.swift */,
 				5AB6FEAB2CB01FD100AFD791 /* MockResponse.swift */,
 			);
@@ -224,6 +227,7 @@
 				5AC6FF962CAEF9B0005E2550 /* ChatsView.swift in Sources */,
 				5AC6FF942CAEF7A5005E2550 /* MessageTextFieldView.swift in Sources */,
 				5AB6FEAC2CB01FD100AFD791 /* MockResponse.swift in Sources */,
+				5AB6FEAE2CB025BF00AFD791 /* APIRequest.swift in Sources */,
 				5AC6FF982CAEFA03005E2550 /* ChatCellView.swift in Sources */,
 				5AC6FF7C2CAEF616005E2550 /* TalkWithChatGPTUsingTCAApp.swift in Sources */,
 				5A0EB4652CAFF5610061D721 /* APIResponse.swift in Sources */,
