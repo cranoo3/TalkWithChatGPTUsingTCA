@@ -13,7 +13,7 @@ struct APIResponse: Decodable, Equatable {
     let model: String
     let choices: [Choice]
     let usage: Usage
-    let systemFingerprint: JSONNull?
+    let systemFingerprint: String?
     
     init(
         id: String = "",
@@ -22,7 +22,7 @@ struct APIResponse: Decodable, Equatable {
         model: String = "",
         choices: [Choice] = [Choice](),
         usage: Usage = Usage(promptTokens: 0, completionTokens: 0, totalTokens: 0),
-        systemFingerprint: JSONNull? = nil
+        systemFingerprint: String? = nil
     ) {
         self.id = id
         self.object = object
@@ -32,10 +32,10 @@ struct APIResponse: Decodable, Equatable {
         self.usage = usage
         self.systemFingerprint = systemFingerprint
     }
-    enum CodingKeys: String, CodingKey {
-        case id, object, created, model, choices, usage
-        case systemFingerprint = "system_fingerprint"
-    }
+//    enum CodingKeys: String, CodingKey {
+//        case id, object, created, model, choices, usage
+//        case systemFingerprint = "system_fingerprint"
+//    }
 }
 
 // MARK: - Choice
@@ -44,10 +44,10 @@ struct Choice: Decodable, Equatable {
     let message: Message
     let finishReason: String
 
-    enum CodingKeys: String, CodingKey {
-        case index, message
-        case finishReason = "finish_reason"
-    }
+//    enum CodingKeys: String, CodingKey {
+//        case index, message
+//        case finishReason = "finish_reason"
+//    }
 }
 
 // MARK: - Message
@@ -60,11 +60,11 @@ struct Message: Codable, Hashable, Equatable {
 struct Usage: Decodable, Equatable {
     let promptTokens, completionTokens, totalTokens: Int
 
-    enum CodingKeys: String, CodingKey {
-        case promptTokens = "prompt_tokens"
-        case completionTokens = "completion_tokens"
-        case totalTokens = "total_tokens"
-    }
+//    enum CodingKeys: String, CodingKey {
+//        case promptTokens = "prompt_tokens"
+//        case completionTokens = "completion_tokens"
+//        case totalTokens = "total_tokens"
+//    }
 }
 
 // MARK: - Encode/decode helpers

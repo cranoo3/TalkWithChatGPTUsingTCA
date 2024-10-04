@@ -44,8 +44,9 @@ struct MessageFeature {
             case .sendButtonTapped:
                 // 送信するメッセージを作成
                 state.messages.append(Message(role: "user", content: state.messageParameter))
-                // TextFieldを空にする
+                // TextFieldを空にする、ProgressViewを表示する
                 state.messageParameter = ""
+                state.isLoading = true
                 // FIXME: モデル名 ハードコーディング
                 return .send(.sendRequest(APIRequest(model: "gpt-4o", messages: state.messages)))
                 
@@ -59,7 +60,6 @@ struct MessageFeature {
                 
                 // MARK: - リクエスト
             case let .sendRequest(messageData):
-                print("sendRequest")
                 return .run { send in
                     await send(.apiResponse(
                         Result { try await apiClient.fetch(messageData) }
@@ -69,12 +69,14 @@ struct MessageFeature {
             case let .apiResponse(.success(responseData)):
                 guard let message = responseData.choices.first?.message else {
                     // ここって.noneでいいのかな
+                    print("message is nil")
                     return .none
                 }
                 state.messages.append(message)
                 state.isLoading = false
                 return .none
             case .apiResponse(.failure):
+                state.isLoading = false
                 return .none
             }
         }

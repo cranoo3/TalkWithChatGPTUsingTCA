@@ -11,7 +11,9 @@ import ComposableArchitecture
 @DependencyClient
 struct APIClient {
     var fetch: @Sendable (APIRequest) async throws -> APIResponse
-    struct FetchError: Error, Equatable {}
+    enum FetchError: Error, Equatable {
+        case cantGetURLFromPlist
+    }
 }
 
 extension APIClient: TestDependencyKey {
@@ -24,23 +26,29 @@ extension APIClient: TestDependencyKey {
 
 extension APIClient: DependencyKey {
     static let liveValue = APIClient { request in
-        // FIXME: URLのハードコーディング + 強制アンラップ
-        var url = URL(string: "https://api.openai.com/v1/chat/completions")!
+        let urlString = PlistDecoder.shared.getValue(from: .url) ?? ""
+        guard let url = URL(string: urlString) else {
+            throw FetchError.cantGetURLFromPlist
+        }
         
+        let apiKey = PlistDecoder.shared.getValue(from: .apiKey) ?? ""
+        let orgId = PlistDecoder.shared.getValue(from: .orgId) ?? ""
         var requestBody = try JSONEncoder().encode(request)
         
         var urlRequest = URLRequest(url: url)
         urlRequest.httpMethod = "POST"
         urlRequest.allHTTPHeaderFields = [
-            "Authorization" : "Bearer xxxxxx",
-            "OpenAI-Organization": "xxxxxx",
+            "Authorization" : "Bearer \(apiKey)",
+            "OpenAI-Organization": "\(orgId)",
             "Content-Type" : "application/json"]
         urlRequest.httpBody = requestBody
         
         // FIXME: レスポンスデータのエラーハンドリングをしよう
         let (data, _) = try await URLSession.shared.data(for: urlRequest)
-        let decodeData = try JSONDecoder().decode(APIResponse.self, from: data)
         
+        let jsonDecoder = JSONDecoder()
+        jsonDecoder.keyDecodingStrategy = .convertFromSnakeCase
+        let decodeData = try jsonDecoder.decode(APIResponse.self, from: data)
         return decodeData
     }
 }
