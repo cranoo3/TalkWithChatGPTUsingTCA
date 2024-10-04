@@ -24,11 +24,10 @@ struct MessageView: View {
                                 endPoint: .bottom
                             )
                         )
-                        
                     
                     Spacer()
                     
-                    ChatTextFieldView()
+                    ChatTextFieldView(didSendButtonTapped: {print("Hello")})
                         .shadow(radius: 10)
                         .padding()
                 }

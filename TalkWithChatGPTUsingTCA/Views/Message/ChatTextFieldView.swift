@@ -8,14 +8,24 @@
 import SwiftUI
 
 struct ChatTextFieldView: View {
+    let didSendButtonTapped: () -> Void
+    
     var body: some View {
         HStack {
             TextField("メッセージを入力", text: .constant(""))
                 .padding()
             
-            Button() {
-                
-            } label: {
+            // MARK: お悩み
+            // 1と2どっちが適切なんだろう？
+            // -- 1
+            // Button {
+            //    didSendButtonTapped()
+            // } label: {
+            //    Image(systemName: "paperplane")
+            //         .fontWeight(.bold)
+            // }
+            // -- 2
+            Button(action: didSendButtonTapped) {
                 Image(systemName: "paperplane")
                     .fontWeight(.bold)
             }
@@ -27,5 +37,7 @@ struct ChatTextFieldView: View {
 }
 
 #Preview {
-    ChatTextFieldView()
+    ChatTextFieldView {
+        print("Sample")
+    }
 }
