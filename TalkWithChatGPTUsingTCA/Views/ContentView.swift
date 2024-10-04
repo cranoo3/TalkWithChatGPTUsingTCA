@@ -6,15 +6,22 @@
 //
 
 import SwiftUI
+import ComposableArchitecture
 
 struct ContentView: View {
+    let store: StoreOf<MessageFeature>
+    
     var body: some View {
         VStack {
-            MessageView()
+            MessageView(store: store)
         }
     }
 }
 
 #Preview {
-    ContentView()
+    ContentView(
+        store: Store(initialState: MessageFeature.State()) {
+            MessageFeature()
+        }
+    )
 }

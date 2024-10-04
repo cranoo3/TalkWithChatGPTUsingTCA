@@ -6,12 +6,16 @@
 //
 
 import SwiftUI
+import ComposableArchitecture
 
 struct MessageView: View {
+    let store: StoreOf<MessageFeature>
+    
     var body: some View {
         ZStack {
             ChatsView()
             
+            // 画面上部グラデーション
             GeometryReader { reader in
                 VStack {
                     Rectangle()
@@ -27,7 +31,13 @@ struct MessageView: View {
                     
                     Spacer()
                     
-                    ChatTextFieldView(didSendButtonTapped: {print("Hello")})
+                    if store.isLoading {
+                        ProgressView()
+                    }
+                    
+                    Spacer()
+                    
+                    MessageTextFieldView(store: store)
                         .shadow(radius: 10)
                         .padding()
                 }
@@ -37,5 +47,9 @@ struct MessageView: View {
 }
 
 #Preview {
-    MessageView()
+    MessageView(
+        store: Store(initialState: MessageFeature.State()) {
+            MessageFeature()
+        }
+    )
 }

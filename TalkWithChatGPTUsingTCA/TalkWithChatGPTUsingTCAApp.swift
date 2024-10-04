@@ -6,12 +6,18 @@
 //
 
 import SwiftUI
+import ComposableArchitecture
 
 @main
 struct TalkWithChatGPTUsingTCAApp: App {
+    static let store = Store(initialState: MessageFeature.State()) {
+        MessageFeature()
+            ._printChanges()
+    }
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentView(store: TalkWithChatGPTUsingTCAApp.store)
         }
     }
 }
