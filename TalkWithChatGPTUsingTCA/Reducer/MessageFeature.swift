@@ -47,8 +47,8 @@ struct MessageFeature {
                 // TextFieldを空にする、ProgressViewを表示する
                 state.messageParameter = ""
                 state.isLoading = true
-                // FIXME: モデル名 ハードコーディング
-                return .send(.sendRequest(APIRequest(model: "gpt-4o", messages: state.messages)))
+                let model = PlistDecoder.shared.getValue(from: .model) ?? ""
+                return .send(.sendRequest(APIRequest(model: model, messages: state.messages)))
                 
             case .scrollChanged:
                 state.isKeyboardFocused = false
